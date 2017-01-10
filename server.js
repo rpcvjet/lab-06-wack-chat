@@ -35,15 +35,14 @@ server.on('connection', function(socket){
       s.write(`${socket.username}: ${typedtext}`);
 
     });
-
-    socket.on('close', function(){
-      console.log('a client left the chat');
-      socket.forEach((s, index) => {
-        if(s == socket)
-          socket.splice(index, 1);
-      }); //end of for loop
-    });  //end of 'on close' function
   });//end of socket 'on connection' function
+  socket.on('close', function(){
+    console.log('a client left the chat');
+    usersOnline.forEach((s, index) => {
+      if(s == socket)
+        socket.splice(index, 1);
+    }); //end of for loop
+  });  //end of 'on close' function
 }); //end of server.on function
 
 
