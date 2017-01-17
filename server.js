@@ -20,7 +20,7 @@ server.on('connection', function(socket){
       return parsemessage.renameUserCommand(typedtext, socket); //end of rename function
 
     if(typedtext.startsWith('/dm'))
-      return parsemessage.directMessage(typedtext, usersOnline);
+      return parsemessage.directMessage(typedtext, socket, usersOnline);
 
     if (typedtext.startsWith('/users'))
       return parsemessage.requestUsernames(socket, usersOnline);
@@ -29,7 +29,7 @@ server.on('connection', function(socket){
       return parsemessage.troll(typedtext, usersOnline);
 
     if (typedtext.startsWith('/ban'))
-      return parsemessage.banUser(typedtext, usersOnline);
+      return parsemessage.banUser(typedtext, socket, usersOnline);
 
     usersOnline.forEach(s => {
       s.write(`${socket.username}: ${typedtext}`);
